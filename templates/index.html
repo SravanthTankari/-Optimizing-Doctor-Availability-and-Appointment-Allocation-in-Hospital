@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doctor Availability Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .prediction {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Doctor Availability Predictor</h1>
+    
+    {% if prediction %}
+    <div class="prediction">
+        <h3>Prediction Result:</h3>
+        <p>{{ prediction }}</p>
+        {% if confidence %}
+        <p>Confidence: {{ confidence }}</p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <form action="/predict" method="post">
+        <div class="form-group">
+            <label for="Gender">Gender:</label>
+            <select name="Gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="Age">Age:</label>
+            <input type="number" name="Age" required min="0" max="120">
+        </div>
+
+        <div class="form-group">
+            <label for="Scholarship">Scholarship (0/1):</label>
+            <select name="Scholarship" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="Hypertension">Hypertension (0/1):</label>
+            <select name="Hypertension" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="Diabetes">Diabetes (0/1):</label>
+            <select name="Diabetes" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="Alcoholism">Alcoholism (0/1):</label>
+            <select name="Alcoholism" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="Handicap">Handicap (0/1):</label>
+            <select name="Handicap" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="SMS_received">SMS Received (0/1):</label>
+            <select name="SMS_received" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="WeekDay">Week Day (0-6):</label>
+            <select name="WeekDay" required>
+                <option value="0">Monday</option>
+                <option value="1">Tuesday</option>
+                <option value="2">Wednesday</option>
+                <option value="3">Thursday</option>
+                <option value="4">Friday</option>
+                <option value="5">Saturday</option>
+                <option value="6">Sunday</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="DayScheduled">Day Scheduled (1-31):</label>
+            <input type="number" name="DayScheduled" required min="1" max="31">
+        </div>
+
+        <button type="submit">Predict Availability</button>
+    </form>
+</body>
+</html>
